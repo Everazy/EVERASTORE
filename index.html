@@ -825,12 +825,51 @@
             else window.addTierRange(sid);
         };
 
-        window.addTierRange = (sid, min='', max='', price='') => {
-            const container = document.querySelector(`#${sid} .tier-container`);
-            const div = document.createElement('div'); div.className = "tier-row flex gap-1";
-            div.innerHTML = `<input type="number" placeholder="Min" value="${min}" class="t-min w-12 text-[8px] p-1 border rounded"><input type="number" placeholder="Max" value="${max}" class="t-max w-12 text-[8px] p-1 border rounded"><input type="number" placeholder="Harga" value="${price}" class="t-price flex-1 text-[8px] p-1 border rounded"><button onclick="this.parentElement.remove()" class="text-red-300"><i class="fas fa-minus text-[8px]"></i></button>`;
-            container.appendChild(div);
-        };
+window.addTierRange = (sid, min='', max='', price='') => {
+    const container = document.querySelector(`#${sid} .tier-container`);
+    const div = document.createElement('div'); 
+    div.className = "tier-row flex gap-1 items-center";
+
+    div.innerHTML = `
+        <input type="text" 
+            placeholder="KODE" 
+            readonly 
+            class="t-code w-12 text-[8px] p-1 border rounded bg-indigo-50 font-black uppercase text-indigo-700">
+
+        <input type="number" 
+            placeholder="Min" 
+            value="${min}" 
+            class="t-min w-12 text-[8px] p-1 border rounded">
+
+        <input type="number" 
+            placeholder="Max" 
+            value="${max}" 
+            class="t-max w-12 text-[8px] p-1 border rounded">
+
+        <input type="number" 
+            placeholder="Harga" 
+            value="${price}" 
+            class="t-price flex-1 text-[8px] p-1 border rounded">
+
+        <button onclick="this.parentElement.remove()" class="text-red-300">
+            <i class="fas fa-minus text-[8px]"></i>
+        </button>
+    `;
+
+    container.appendChild(div);
+    syncTierCodes(sid);
+};
+
+window.syncTierCodes = (sid) => {
+    const box = document.getElementById(sid);
+    if (!box) return;
+
+    const code = box.querySelector('.s-code')?.value || '';
+
+    box.querySelectorAll('.t-code').forEach(input => {
+        input.value = code.toUpperCase();
+    });
+};
 
         window.saveProduct = async () => {
             const name = document.getElementById('edit-name').value;
