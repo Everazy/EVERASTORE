@@ -537,7 +537,7 @@
             }
         };
 
-       window.updateSosmedPrice = () => {
+window.updateSosmedPrice = () => {
     const select = document.getElementById('sosmed-service-select'); 
     if (!select || !select.value) return;
 
@@ -575,12 +575,7 @@
 
         document.getElementById('txt-price').innerText = `Rp 0`;
         document.getElementById('sosmed-price-info').classList.add('hidden');
-    } else {
-    socialPrice = 0; 
-    currentSocialTier = null;
-    document.getElementById('txt-price').innerText = `Rp 0`;
-    document.getElementById('sosmed-price-info').classList.add('hidden');
-}
+    }
 };
 
         function updateCheckoutTotal(basePrice) {
