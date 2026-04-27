@@ -825,15 +825,18 @@
             else window.addTierRange(sid);
         };
 
-window.addTierRange = (sid, min='', max='', price='') => {
+window.addTierRange = (sid, min='', max='', price='', code='') => {
     const container = document.querySelector(`#${sid} .tier-container`);
     const div = document.createElement('div'); 
     div.className = "tier-row flex gap-1 items-center";
 
+    const parentCode = document.getElementById(sid)?.querySelector('.s-code')?.value || '';
+    const finalCode = code || parentCode;
+
     div.innerHTML = `
         <input type="text" 
             placeholder="KODE" 
-            readonly 
+            value="${finalCode}" 
             class="t-code w-12 text-[8px] p-1 border rounded bg-indigo-50 font-black uppercase text-indigo-700">
 
         <input type="number" 
@@ -857,18 +860,6 @@ window.addTierRange = (sid, min='', max='', price='') => {
     `;
 
     container.appendChild(div);
-    syncTierCodes(sid);
-};
-
-window.syncTierCodes = (sid) => {
-    const box = document.getElementById(sid);
-    if (!box) return;
-
-    const code = box.querySelector('.s-code')?.value || '';
-
-    box.querySelectorAll('.t-code').forEach(input => {
-        input.value = code.toUpperCase();
-    });
 };
 
         window.saveProduct = async () => {
