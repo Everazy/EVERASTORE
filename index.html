@@ -821,8 +821,8 @@
                 <button onclick="window.addTierRange('${sid}')" class="w-full py-1 border border-dashed rounded-lg text-[8px] font-black text-slate-400 uppercase">+ Tier</button>
             `;
             container.appendChild(div);
-            if(rateList.length > 0) rateList.forEach(r => window.addTierRange(sid, r.min, r.max, r.price));
-            else window.addTierRange(sid);
+if(rateList.length > 0) rateList.forEach(r => window.addTierRange(sid, r.min, r.max, r.price, r.code));
+else window.addTierRange(sid);
         };
 
 window.addTierRange = (sid, min='', max='', price='', code='') => {
@@ -881,11 +881,12 @@ window.addTierRange = (sid, min='', max='', price='', code='') => {
                     loginType: box.querySelector('.s-type').value,
                     promo: box.querySelector('.s-promo').checked,
                     active: box.querySelector('.s-active').checked,
-                    rateList: Array.from(box.querySelectorAll('.tier-row')).map(row => ({ 
-                        min: parseInt(row.querySelector('.t-min').value) || 1, 
-                        max: parseInt(row.querySelector('.t-max').value) || 9999, 
-                        price: parseInt(row.querySelector('.t-price').value) || 0 
-                    }))
+rateList: Array.from(box.querySelectorAll('.tier-row')).map(row => ({ 
+    code: row.querySelector('.t-code').value.toUpperCase(),
+    min: parseInt(row.querySelector('.t-min').value) || 1, 
+    max: parseInt(row.querySelector('.t-max').value) || 9999, 
+    price: parseInt(row.querySelector('.t-price').value) || 0 
+}))
                 }));
             } else {
                 data.albums = Array.from(document.querySelectorAll('.album-box')).map(box => ({
