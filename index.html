@@ -252,7 +252,9 @@
     <main id="admin-view" class="max-w-md mx-auto p-5 pb-40 hidden">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-lg font-black text-slate-800 uppercase tracking-tight">Katalog Admin</h1>
-            <button onclick="openProductModal()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-[9px] font-black uppercase shadow-lg shadow-indigo-100">Tambah +</button>
+            <button onclick="openProductModal()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-[9px] font-black 
+                    
+                    uppercase shadow-lg shadow-indigo-100">Tambah +</button>
         </div>
 
         <!-- Filter Tab Admin -->
@@ -271,7 +273,7 @@
         <div class="bg-white w-full max-w-xs rounded-[2rem] p-8 shadow-2xl">
             <h3 class="text-center font-black text-indigo-600 uppercase tracking-widest text-xs mb-6">Akses Admin</h3>
             <div class="space-y-3 mb-6">
-                <input type="Email" id="admin-email" placeholder="Email Admin" class="w-full bg-slate-50 border p-4 rounded-xl outline-none text-center font-bold text-xs">
+                <input type="email" id="admin-email" placeholder="Email Admin" class="w-full bg-slate-50 border p-4 rounded-xl outline-none text-center font-bold text-xs">
                 <input type="password" id="admin-pw" onkeyup="handleAdminKey(event)" placeholder="Password" class="w-full bg-slate-50 border p-4 rounded-xl outline-none text-center font-bold text-xs">
             </div>
             <button onclick="checkPassword()" class="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-black text-[10px] uppercase shadow-lg">Login</button>
@@ -616,7 +618,7 @@
                 <div class="space-y-4">
                     ${loginType === 'id' ? '<div class="grid grid-cols-2 gap-2"><input id="final-id" placeholder="ID Akun" class="bg-slate-50 p-3 rounded-xl border text-xs font-bold outline-none"><input id="final-server" placeholder="Server" class="bg-slate-50 p-3 rounded-xl border text-xs font-bold outline-none"></div>' : ''}
                     ${loginType === 'login' ? '<div class="grid grid-cols-2 gap-2"><input id="final-acc" placeholder="Email/HP" class="bg-slate-50 p-3 rounded-xl border text-xs font-bold outline-none"><input id="final-pw" type="password" placeholder="Pass" class="bg-slate-50 p-3 rounded-xl border text-xs font-bold outline-none"></div>' : ''}
-                    ${loginType === 'invite' ? '<input id="final-invite" placeholder="email" class="w-full bg-slate-50 p-3 rounded-xl border text-xs font-bold outline-none">' : ''}
+                    ${loginType === 'invite' ? '<input id="final-invite" placeholder="Email" class="w-full bg-slate-50 p-3 rounded-xl border text-xs font-bold outline-none">' : ''}
                     ${quantityInputHtml}
                     <textarea id="final-note" placeholder="Catatan tambahan (Opsional)" class="w-full bg-slate-50 p-3 rounded-xl border text-xs font-bold h-20 resize-none outline-none"></textarea>
                 </div>
