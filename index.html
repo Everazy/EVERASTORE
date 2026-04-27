@@ -385,7 +385,7 @@
 
         let storeData = { topup: { items: [] }, sosmed: { items: [] }, premium: { items: [] } };
         let activeCat = null, activeProd = null, activeVar = null, isAdmin = false, currentEditId = null, currentFilter = 'all';
-        let socialPrice = 0, currentSocialService = null, premiumQty = 1;
+        let socialPrice = 0, currentSocialService = null, currentSocialTier = null, premiumQty = 1;
 
         // --- OPTIMASI GAMBAR ---
         function getOptimizedUrl(url) {
@@ -537,23 +537,51 @@
             }
         };
 
-        window.updateSosmedPrice = () => {
-            const select = document.getElementById('sosmed-service-select'); if(!select || !select.value) return;
-            const qtyInput = document.getElementById('sosmed-qty'); const qty = parseInt(qtyInput.value) || 0;
-            const service = activeProd.subServices[select.value]; currentSocialService = service;
-            if (qty > 0 && service) {
-                const sorted = [...service.rateList].sort((a,b) => a.min - b.min);
-                let rate = sorted[0].price; const tier = sorted.find(r => qty >= r.min && qty <= r.max);
-                if (tier) rate = tier.price; else { const h = sorted.filter(r => qty >= r.min).pop(); if(h) rate = h.price; }
-                socialPrice = Math.round(qty * rate);
-                document.getElementById('txt-price').innerText = `Rp ${socialPrice.toLocaleString('id-ID')}`;
-                document.getElementById('sosmed-price-hint').innerText = `Harga: Rp ${rate.toLocaleString('id-ID')}/unit`;
-                document.getElementById('sosmed-price-info').classList.remove('hidden');
-            } else {
-                socialPrice = 0; document.getElementById('txt-price').innerText = `Rp 0`;
-                document.getElementById('sosmed-price-info').classList.add('hidden');
-            }
-        };
+       window.updateSosmedPrice = () => {
+    const select = document.getElementById('sosmed-service-select'); 
+    if (!select || !select.value) return;
+
+    const qtyInput = document.getElementById('sosmed-qty'); 
+    const qty = parseInt(qtyInput.value) || 0;
+
+    const service = activeProd.subServices[select.value]; 
+    currentSocialService = service;
+
+    if (qty > 0 && service) {
+        const sorted = [...service.rateList].sort((a, b) => a.min - b.min);
+
+        let selectedTier = sorted[0];
+
+        const tier = sorted.find(r => qty >= r.min && qty <= r.max);
+
+        if (tier) {
+            selectedTier = tier;
+        } else {
+            const h = sorted.filter(r => qty >= r.min).pop();
+            if (h) selectedTier = h;
+        }
+
+        currentSocialTier = selectedTier;
+
+        const rate = selectedTier.price;
+        socialPrice = Math.round(qty * rate);
+
+        document.getElementById('txt-price').innerText = `Rp ${socialPrice.toLocaleString('id-ID')}`;
+        document.getElementById('sosmed-price-hint').innerText = `Harga: Rp ${rate.toLocaleString('id-ID')}/unit`;
+        document.getElementById('sosmed-price-info').classList.remove('hidden');
+    } else {
+        socialPrice = 0; 
+        currentSocialTier = null;
+
+        document.getElementById('txt-price').innerText = `Rp 0`;
+        document.getElementById('sosmed-price-info').classList.add('hidden');
+    } else {
+    socialPrice = 0; 
+    currentSocialTier = null;
+    document.getElementById('txt-price').innerText = `Rp 0`;
+    document.getElementById('sosmed-price-info').classList.add('hidden');
+}
+};
 
         function updateCheckoutTotal(basePrice) {
             const qtyInput = document.getElementById('final-qty'); if(!qtyInput) return;
@@ -657,7 +685,9 @@
             if (fid && fid.value) note += `[ID: ${fid.value}] [Srv: ${fsv.value || '-'}]`;
             if (fac && fac.value) note += `[Acc: ${fac.value}] [PW: ${fpw.value}]`;
             if (finv && finv.value) note += `[Target: ${finv.value}]`;
-            const prodCode = activeProd.category === 'sosmed' ? (currentSocialService.code || 'SOS') : (activeVar.code || 'VAR');
+            const prodCode = activeProd.category === 'sosmed' 
+    ? (currentSocialTier?.code || 'SOS') 
+    : (activeVar.code || 'VAR');
             const qty = activeProd.category === 'sosmed'
                 ? document.getElementById('sosmed-qty').value
                 : activeProd.category === 'premium'
@@ -801,7 +831,6 @@
             div.innerHTML = `
                 <div class="flex flex-wrap items-center gap-2">
                     <input type="text" placeholder="Layanan" value="${name}" class="s-name flex-1 bg-white p-2 rounded-lg text-[10px] font-bold border">
-                    <input type="text" placeholder="KODE" value="${code}" class="s-code w-14 bg-indigo-50 p-2 rounded-lg text-[9px] font-black border uppercase">
                     <select class="s-type bg-slate-100 p-2 rounded-lg text-[8px] font-bold">
                         <option value="none" ${type === 'none' ? 'selected' : ''}>Polos</option>
                         <option value="id" ${type === 'id' ? 'selected' : ''}>ID</option>
@@ -830,14 +859,11 @@ window.addTierRange = (sid, min='', max='', price='', code='') => {
     const div = document.createElement('div'); 
     div.className = "tier-row flex gap-1 items-center";
 
-    const parentCode = document.getElementById(sid)?.querySelector('.s-code')?.value || '';
-    const finalCode = code || parentCode;
-
     div.innerHTML = `
         <input type="text" 
             placeholder="KODE" 
-            value="${finalCode}" 
-            class="t-code w-12 text-[8px] p-1 border rounded bg-indigo-50 font-black uppercase text-indigo-700">
+            value="${code}" 
+            class="t-code w-14 bg-indigo-50 p-1 rounded text-[8px] font-black border uppercase text-indigo-700">
 
         <input type="number" 
             placeholder="Min" 
