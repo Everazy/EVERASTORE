@@ -529,6 +529,14 @@ body.dark .hero-banner {
 }
 
 
+/* === HIDE HERO BANNER BUTTONS FINAL === */
+.hero-nav,
+.hero-arrow,
+.hero-dots,
+.hero-dot {
+    display: none !important;
+}
+
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -585,21 +593,6 @@ body.dark .hero-banner {
                     <div class="hero-slide">
                         <img src="https://raw.githubusercontent.com/Everazy/EVERASTORE/refs/heads/main/BANNER%203.png" alt="Banner Everastore 3">
                     </div>
-                </div>
-
-                <div class="hero-nav">
-                    <button class="hero-arrow prev" type="button" aria-label="Banner sebelumnya">
-                        <i class="fas fa-chevron-left text-[11px]"></i>
-                    </button>
-                    <button class="hero-arrow next" type="button" aria-label="Banner berikutnya">
-                        <i class="fas fa-chevron-right text-[11px]"></i>
-                    </button>
-                </div>
-
-                <div class="hero-dots" aria-label="Navigasi banner">
-                    <button class="hero-dot active" type="button" data-slide="0" aria-label="Banner 1"></button>
-                    <button class="hero-dot" type="button" data-slide="1" aria-label="Banner 2"></button>
-                    <button class="hero-dot" type="button" data-slide="2" aria-label="Banner 3"></button>
                 </div>
             </div>
         </section>
