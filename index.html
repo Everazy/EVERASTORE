@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Katalog Store - Everastore</title>
+    <title>Katalog Store - Everastore Final</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
@@ -382,8 +382,11 @@ body.dark #theme-toggle {
     aspect-ratio: 16 / 5; /* rasio banner sama di HP dan laptop */
     overflow: hidden;
     border-radius: 2rem;
-    background: #e2e8f0;
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    background: #ffffff;
+    border: 1px solid rgba(37, 99, 235, 0.14);
+    box-shadow:
+        0 12px 35px rgba(15, 23, 42, 0.12),
+        0 4px 12px rgba(15, 23, 42, 0.05);
     user-select: none;
     touch-action: pan-y;
 }
@@ -412,14 +415,7 @@ body.dark #theme-toggle {
 }
 
 .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(15, 23, 42, 0.62) 0%,
-        rgba(15, 23, 42, 0.28) 48%,
-        rgba(15, 23, 42, 0.08) 100%
-    );
+    display: none;
 }
 
 .hero-content {
@@ -513,7 +509,10 @@ body.dark #theme-toggle {
 
 body.dark .hero-banner {
     background: #1e293b;
-    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.25);
+    border-color: rgba(129, 140, 248, 0.26);
+    box-shadow:
+        0 14px 38px rgba(0, 0, 0, 0.32),
+        0 4px 12px rgba(129, 140, 248, 0.12);
 }
 
 @media (min-width: 768px) {
@@ -577,29 +576,14 @@ body.dark .hero-banner {
                 <div class="hero-banner-track">
                     <div class="hero-slide">
                         <img src="https://raw.githubusercontent.com/Everazy/EVERASTORE/refs/heads/main/BANNER%201.png" alt="Banner Everastore 1">
-                        <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <h3>Everastore New Update</h3>
-                            <p>Tampilan katalog lebih fresh, responsif, dan nyaman untuk semua perangkat.</p>
-                        </div>
                     </div>
 
                     <div class="hero-slide">
                         <img src="https://raw.githubusercontent.com/Everazy/EVERASTORE/refs/heads/main/BANNER%202.png" alt="Banner Everastore 2">
-                        <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <h3>Premium Digital</h3>
-                            <p>Top up game, kebutuhan sosmed, dan layanan premium dalam satu katalog praktis.</p>
-                        </div>
                     </div>
 
                     <div class="hero-slide">
                         <img src="https://raw.githubusercontent.com/Everazy/EVERASTORE/refs/heads/main/BANNER%203.png" alt="Banner Everastore 3">
-                        <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <h3>Fast Order</h3>
-                            <p>Pilih produk lebih mudah dengan detail, harga, dan tombol order yang jelas.</p>
-                        </div>
                     </div>
                 </div>
 
