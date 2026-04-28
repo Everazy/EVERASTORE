@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Katalog Store - Everastore</title>
-
-<link rel="icon" type="image/jpeg" href="/EVERASTORE.jpg?v=10">
-<link rel="shortcut icon" type="image/jpeg" href="/EVERASTORE.jpg?v=10">
-<link rel="apple-touch-icon" href="/EVERASTORE.jpg?v=10">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
@@ -376,6 +371,165 @@ body.dark #theme-toggle {
     color: #facc15 !important;
 }
 
+/* === HERO BANNER SLIDER FINAL === */
+.hero-banner-section {
+    margin-bottom: 2rem;
+}
+
+.hero-banner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 5; /* rasio banner sama di HP dan laptop */
+    overflow: hidden;
+    border-radius: 2rem;
+    background: #e2e8f0;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    user-select: none;
+    touch-action: pan-y;
+}
+
+.hero-banner-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.45s ease;
+    will-change: transform;
+}
+
+.hero-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(15, 23, 42, 0.62) 0%,
+        rgba(15, 23, 42, 0.28) 48%,
+        rgba(15, 23, 42, 0.08) 100%
+    );
+}
+
+.hero-content {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 2;
+    color: white;
+    max-width: 74%;
+}
+
+.hero-content h3 {
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.hero-content p {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.9);
+}
+
+.hero-nav {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.22);
+    backdrop-filter: blur(8px);
+    color: white;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: 0.2s ease;
+}
+
+.hero-arrow:hover {
+    background: rgba(255,255,255,0.34);
+}
+
+.hero-arrow:active {
+    transform: translateY(-50%) scale(0.92);
+}
+
+.hero-arrow.prev {
+    left: 12px;
+}
+
+.hero-arrow.next {
+    right: 12px;
+}
+
+.hero-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 4;
+}
+
+.hero-dot {
+    width: 8px;
+    height: 8px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.45);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.hero-dot.active {
+    width: 24px;
+    background: #ffffff;
+}
+
+body.dark .hero-banner {
+    background: #1e293b;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.25);
+}
+
+@media (min-width: 768px) {
+    .hero-banner {
+        aspect-ratio: 16 / 5; /* tetap sama */
+        border-radius: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-banner {
+        aspect-ratio: 16 / 5; /* tetap sama */
+    }
+}
+
+
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -416,6 +570,56 @@ body.dark #theme-toggle {
 
     <!-- Tampilan User -->
     <main id="user-view" class="app-shell p-5 lg:p-8 pb-40">
+
+        <!-- Hero Banner Slider -->
+        <section class="hero-banner-section">
+            <div id="hero-banner" class="hero-banner">
+                <div class="hero-banner-track">
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1600&auto=format&fit=crop" alt="Banner Everastore 1">
+                        <div class="hero-overlay"></div>
+                        <div class="hero-content">
+                            <h3>Everastore New Update</h3>
+                            <p>Tampilan katalog lebih fresh, responsif, dan nyaman untuk semua perangkat.</p>
+                        </div>
+                    </div>
+
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=1600&auto=format&fit=crop" alt="Banner Everastore 2">
+                        <div class="hero-overlay"></div>
+                        <div class="hero-content">
+                            <h3>Premium Digital</h3>
+                            <p>Top up game, kebutuhan sosmed, dan layanan premium dalam satu katalog praktis.</p>
+                        </div>
+                    </div>
+
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop" alt="Banner Everastore 3">
+                        <div class="hero-overlay"></div>
+                        <div class="hero-content">
+                            <h3>Fast Order</h3>
+                            <p>Pilih produk lebih mudah dengan detail, harga, dan tombol order yang jelas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-nav">
+                    <button class="hero-arrow prev" type="button" aria-label="Banner sebelumnya">
+                        <i class="fas fa-chevron-left text-[11px]"></i>
+                    </button>
+                    <button class="hero-arrow next" type="button" aria-label="Banner berikutnya">
+                        <i class="fas fa-chevron-right text-[11px]"></i>
+                    </button>
+                </div>
+
+                <div class="hero-dots" aria-label="Navigasi banner">
+                    <button class="hero-dot active" type="button" data-slide="0" aria-label="Banner 1"></button>
+                    <button class="hero-dot" type="button" data-slide="1" aria-label="Banner 2"></button>
+                    <button class="hero-dot" type="button" data-slide="2" aria-label="Banner 3"></button>
+                </div>
+            </div>
+        </section>
+
         <!-- Section 01: Kategori -->
         <section class="mb-8">
             <h2 class="text-[10px] font-black text-slate-400 mb-4 uppercase tracking-[0.2em]">01. Pilih Kategori</h2>
@@ -1463,6 +1667,119 @@ window.addTierRange = (sid, min='', max='', price='', code='') => {
             const nextTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
             applyTheme(nextTheme);
         };
+
+
+        // --- HERO BANNER SLIDER ---
+        function initHeroBanner() {
+            const banner = document.getElementById('hero-banner');
+            if (!banner) return;
+
+            const track = banner.querySelector('.hero-banner-track');
+            const slides = banner.querySelectorAll('.hero-slide');
+            const dots = banner.querySelectorAll('.hero-dot');
+            const prevBtn = banner.querySelector('.hero-arrow.prev');
+            const nextBtn = banner.querySelector('.hero-arrow.next');
+
+            let currentIndex = 0;
+            let autoSlide = null;
+            let startX = 0;
+            let endX = 0;
+            const totalSlides = slides.length;
+            const intervalTime = 4000;
+
+            function updateSlider() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            function goToSlide(index) {
+                currentIndex = index;
+                if (currentIndex >= totalSlides) currentIndex = 0;
+                if (currentIndex < 0) currentIndex = totalSlides - 1;
+                updateSlider();
+            }
+
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+
+            function stopAutoSlide() {
+                if (autoSlide) clearInterval(autoSlide);
+            }
+
+            function startAutoSlide() {
+                stopAutoSlide();
+                autoSlide = setInterval(nextSlide, intervalTime);
+            }
+
+            function handleSwipe() {
+                const diff = startX - endX;
+                if (Math.abs(diff) < 50) return;
+
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    nextSlide();
+                    startAutoSlide();
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    prevSlide();
+                    startAutoSlide();
+                });
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    startAutoSlide();
+                });
+            });
+
+            banner.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                stopAutoSlide();
+            }, { passive: true });
+
+            banner.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                handleSwipe();
+                startAutoSlide();
+            }, { passive: true });
+
+            banner.addEventListener('mousedown', (e) => {
+                startX = e.clientX;
+                stopAutoSlide();
+            });
+
+            banner.addEventListener('mouseup', (e) => {
+                endX = e.clientX;
+                handleSwipe();
+                startAutoSlide();
+            });
+
+            banner.addEventListener('mouseenter', stopAutoSlide);
+            banner.addEventListener('mouseleave', startAutoSlide);
+
+            updateSlider();
+            startAutoSlide();
+        }
+
+        initHeroBanner();
 
         // Load theme on start
         const savedTheme = localStorage.getItem('theme');
