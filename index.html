@@ -770,6 +770,56 @@ body.dark .quick-link-green {
     color: #c7d2fe !important;
 }
 
+/* === HELP MENU FINAL === */
+.help-menu-card {
+    text-decoration: none;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 1.6rem;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    width: 100%;
+    text-align: left;
+}
+
+.help-menu-card:hover {
+    border-color: #c7d2fe;
+    box-shadow: 0 12px 28px rgba(79, 70, 229, 0.10);
+    transform: translateY(-1px);
+}
+
+.help-menu-card:active {
+    transform: scale(0.98);
+}
+
+.help-menu-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.help-view {
+    display: none;
+}
+
+.help-view.active {
+    display: block;
+}
+
+body.dark .help-menu-card {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+}
+
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -868,19 +918,16 @@ body.dark .quick-link-green {
                 </button>
             </div>
         </section>
-
-
-
-        <!-- Tombol Cara Order -->
+        <!-- Tombol Bantuan / Help -->
         <section class="mb-8">
-            <button onclick="openCaraOrderModal()" type="button" class="w-full bg-white border border-indigo-100 rounded-[2rem] p-5 shadow-sm flex items-center justify-between active:scale-[0.98] transition-all">
+            <button onclick="openHelpModal()" type="button" class="w-full bg-white border border-indigo-100 rounded-[2rem] p-5 shadow-sm flex items-center justify-between active:scale-[0.98] transition-all">
                 <div class="flex items-center gap-4 text-left">
                     <div class="w-11 h-11 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600">
-                        <i class="fas fa-list-check text-sm"></i>
+                        <i class="fas fa-circle-question text-sm"></i>
                     </div>
                     <div>
-                        <h2 class="text-[10px] font-black text-slate-800 uppercase tracking-[0.15em]">Cara Order</h2>
-                        <p class="text-[8px] font-bold text-slate-400 uppercase mt-0.5">Klik untuk melihat panduan singkat</p>
+                        <h2 class="text-[10px] font-black text-slate-800 uppercase tracking-[0.15em]">Bantuan / Help</h2>
+                        <p class="text-[8px] font-bold text-slate-400 uppercase mt-0.5">Cara order dan istilah store</p>
                     </div>
                 </div>
                 <i class="fas fa-chevron-right text-indigo-400 text-xs"></i>
@@ -891,7 +938,7 @@ body.dark .quick-link-green {
         <!-- Link Cepat -->
         <section class="mb-8">
             <div class="grid grid-cols-3 gap-3">
-                <a id="google-drive-testimonial-link" href="https://drive.google.com/drive/folders/1J2REaUaDImUBaTf0kpGvGpTYe2b2GB4n?usp=drive_link" target="_blank" class="quick-link-card">
+                <a id="google-drive-testimonial-link" href="ISI_LINK_GOOGLE_DRIVE_TESTIMONI" target="_blank" class="quick-link-card">
                     <div class="quick-link-icon quick-link-blue">
                         <i class="fab fa-google-drive text-lg"></i>
                     </div>
@@ -907,7 +954,7 @@ body.dark .quick-link-green {
                     <p class="text-[7px] font-bold text-slate-400 uppercase leading-relaxed mt-1">Promo & update</p>
                 </a>
 
-                <a id="secreto-testimonial-link" href="https://secreto.site/awspz7" target="_blank" class="quick-link-card">
+                <a id="secreto-testimonial-link" href="ISI_LINK_SECRETO_KAMU" target="_blank" class="quick-link-card">
                     <div class="quick-link-icon quick-link-indigo">
                         <i class="fas fa-comment-dots text-lg"></i>
                     </div>
@@ -1002,45 +1049,98 @@ body.dark .quick-link-green {
     </main>
 
 
-    <!-- Modal Cara Order -->
-    <div id="modal-cara-order" class="fixed inset-0 z-[72] flex items-end sm:items-center justify-center p-0 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
+
+
+    <!-- Modal Bantuan / Help -->
+    <div id="modal-help" class="fixed inset-0 z-[72] flex items-end sm:items-center justify-center p-0 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
         <div class="bg-white w-full max-w-md rounded-t-[2.5rem] sm:rounded-[2.5rem] shadow-2xl flex flex-col max-h-[95vh] overflow-hidden">
             <div class="p-6 border-b flex justify-between items-center">
-                <h3 class="font-black text-indigo-600 uppercase tracking-[0.15em] text-[11px]">Cara Order</h3>
-                <button onclick="closeCaraOrderModal()" class="text-slate-300 w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-50 transition-colors">
+                <div class="flex items-center gap-3">
+                    <button id="help-back-btn" onclick="showHelpMenu()" class="hidden text-indigo-500 w-8 h-8 rounded-full bg-indigo-50 items-center justify-center hover:bg-indigo-100 transition-colors">
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </button>
+                    <h3 id="help-modal-title" class="font-black text-indigo-600 uppercase tracking-[0.15em] text-[11px]">Bantuan / Help</h3>
+                </div>
+                <button onclick="closeHelpModal()" class="text-slate-300 w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-50 transition-colors">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div class="modal-body p-6 space-y-4">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3 class="text-[9px] font-black text-slate-800 uppercase mb-1">Pilih Kategori</h3>
-                    <p class="text-[8px] font-bold text-slate-400 leading-relaxed">Pilih kategori Game, Sosmed, atau Premium sesuai kebutuhan.</p>
+
+            <div class="modal-body p-6">
+                <!-- Menu Utama Help -->
+                <div id="help-menu-view" class="help-view active space-y-3">
+                    <button onclick="showHelpView('cara')" type="button" class="help-menu-card">
+                        <div class="help-menu-icon bg-indigo-50 text-indigo-600">
+                            <i class="fas fa-list-check text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-[10px] font-black text-slate-800 uppercase tracking-[0.12em]">Cara Order</h4>
+                            <p class="text-[8px] font-bold text-slate-400 uppercase mt-1">Panduan belanja dari awal sampai WhatsApp</p>
+                        </div>
+                        <i class="fas fa-chevron-right text-indigo-300 text-xs"></i>
+                    </button>
+
+                    <a href="https://padlet.com/myeverast/everastore-18smmgow3xvb1yml" target="_blank" class="help-menu-card">
+                        <div class="help-menu-icon bg-blue-50 text-blue-600">
+                            <i class="fas fa-book-open text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-[10px] font-black text-slate-800 uppercase tracking-[0.12em]">Istilah Store</h4>
+                            <p class="text-[8px] font-bold text-slate-400 uppercase mt-1">Penjelasan istilah produk</p>
+                        </div>
+                        <i class="fas fa-arrow-up-right-from-square text-indigo-300 text-xs"></i>
+                    </a>
+
+                    <a href="https://wa.me/6285750173207" target="_blank" class="help-menu-card">
+                        <div class="help-menu-icon bg-amber-50 text-amber-500">
+                            <i class="fas fa-circle-info text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-[10px] font-black text-slate-800 uppercase tracking-[0.12em]">FAQ Everastore</h4>
+                            <p class="text-[8px] font-bold text-slate-400 uppercase mt-1">Pertanyaan umum Everastore</p>
+                        </div>
+                        <i class="fas fa-arrow-up-right-from-square text-indigo-300 text-xs"></i>
+                    </a>
                 </div>
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3 class="text-[9px] font-black text-slate-800 uppercase mb-1">Pilih Produk</h3>
-                    <p class="text-[8px] font-bold text-slate-400 leading-relaxed">Klik produk, lalu pilih paket atau layanan yang ingin dibeli.</p>
+
+                <!-- Halaman Cara Order -->
+                <div id="help-cara-view" class="help-view space-y-3">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 class="text-[9px] font-black text-slate-800 uppercase mb-1">Pilih Kategori</h3>
+                        <p class="text-[8px] font-bold text-slate-400 leading-relaxed">Pilih kategori Game, Sosmed, atau Premium sesuai kebutuhan.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 class="text-[9px] font-black text-slate-800 uppercase mb-1">Pilih Produk</h3>
+                        <p class="text-[8px] font-bold text-slate-400 leading-relaxed">Klik produk, lalu pilih paket atau layanan yang ingin dibeli.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 class="text-[9px] font-black text-slate-800 uppercase mb-1">Isi Data</h3>
+                        <p class="text-[8px] font-bold text-slate-400 leading-relaxed">Masukkan ID, server, email, link, atau catatan tambahan jika diperlukan.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3 class="text-[9px] font-black text-slate-800 uppercase mb-1">Konfirmasi WhatsApp</h3>
+                        <p class="text-[8px] font-bold text-slate-400 leading-relaxed">Tekan tombol beli, cek pesanan, lalu lanjutkan ke WhatsApp admin.</p>
+                    </div>
                 </div>
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3 class="text-[9px] font-black text-slate-800 uppercase mb-1">Isi Data</h3>
-                    <p class="text-[8px] font-bold text-slate-400 leading-relaxed">Masukkan ID, server, email, link, atau catatan tambahan jika diperlukan.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3 class="text-[9px] font-black text-slate-800 uppercase mb-1">Konfirmasi WhatsApp</h3>
-                    <p class="text-[8px] font-bold text-slate-400 leading-relaxed">Tekan tombol beli, cek pesanan, lalu lanjutkan ke WhatsApp admin.</p>
+                        <i class="fas fa-arrow-up-right-from-square text-indigo-400 text-xs ml-3"></i>
+                    </a>
+                    <p class="text-[8px] font-bold text-slate-400 leading-relaxed bg-slate-50 p-4 rounded-2xl">
+                        Ganti <span class="font-black text-indigo-500">ISI_LINK_FAQ_EVERASTORE</span> dengan link FAQ Everastore kamu.
+                    </p>
                 </div>
             </div>
+
             <div class="p-6 border-t bg-slate-50">
-                <button onclick="closeCaraOrderModal()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black text-[11px] uppercase shadow-lg shadow-indigo-100 active:scale-[0.98] transition-all">
-                    Saya Mengerti
-                </button>
+                <button onclick="closeHelpModal()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black text-[11px] uppercase shadow-lg shadow-indigo-100 active:scale-[0.98] transition-all">
+                    Tutup
+                </a>
             </div>
         </div>
     </div>
-
 
     <!-- Modal Login -->
     <div id="modal-login" class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-sm hidden">
@@ -1050,7 +1150,7 @@ body.dark .quick-link-green {
                 <input type="email" id="admin-email" placeholder="Email Admin" class="w-full bg-slate-50 border p-4 rounded-xl outline-none text-center font-bold text-xs">
                 <input type="password" id="admin-pw" onkeyup="handleAdminKey(event)" placeholder="Password" class="w-full bg-slate-50 border p-4 rounded-xl outline-none text-center font-bold text-xs">
             </div>
-            <button onclick="checkPassword()" class="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-black text-[10px] uppercase shadow-lg">Login</button>
+            <button onclick="checkPassword()" class="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-black text-[10px] uppercase shadow-lg">Login</a>
             <button onclick="hideLogin()" class="w-full py-2 mt-2 text-[8px] font-bold text-slate-300 uppercase">Tutup</button>
         </div>
     </div>
@@ -1955,16 +2055,41 @@ window.addTierRange = (sid, min='', max='', price='', code='') => {
             } catch (err) { showToast("SANDI SALAH!"); }
         };
         window.logout = async () => { if (confirm("Logout Admin?")) { await signOut(auth); location.reload(); } };
-
-
-
-        window.openCaraOrderModal = () => {
-            document.getElementById('modal-cara-order').classList.remove('hidden');
+        window.openHelpModal = () => {
+            document.getElementById('modal-help').classList.remove('hidden');
+            showHelpMenu();
         };
 
-        window.closeCaraOrderModal = () => {
-            document.getElementById('modal-cara-order').classList.add('hidden');
+        window.closeHelpModal = () => {
+            document.getElementById('modal-help').classList.add('hidden');
         };
+
+        window.showHelpMenu = () => {
+            document.querySelectorAll('.help-view').forEach(view => view.classList.remove('active'));
+            document.getElementById('help-menu-view').classList.add('active');
+            document.getElementById('help-modal-title').innerText = 'Bantuan / Help';
+            const backBtn = document.getElementById('help-back-btn');
+            backBtn.classList.add('hidden');
+            backBtn.classList.remove('flex');
+        };
+
+        window.showHelpView = (type) => {
+            document.querySelectorAll('.help-view').forEach(view => view.classList.remove('active'));
+
+            const titles = {
+                cara: 'Cara Order'
+            };
+
+            const target = document.getElementById(`help-${type}-view`);
+            if (target) target.classList.add('active');
+
+            document.getElementById('help-modal-title').innerText = titles[type] || 'Bantuan / Help';
+            const backBtn = document.getElementById('help-back-btn');
+            backBtn.classList.remove('hidden');
+            backBtn.classList.add('flex');
+        };
+
+
 
         // --- SEARCH, BEST SELLER, TESTIMONI, DASHBOARD ---
         window.searchProducts = () => {
